@@ -26,6 +26,10 @@ Then open http://localhost:8080.
 
 Every number in the demos is synthetic, and the footer says so. Don't claim CLIA, CAP, 21 CFR Part 11 or HIPAA compliance on this page; the app doesn't make those claims either.
 
+## Updating styles or scripts
+
+Hostinger's CDN keeps CSS and JS for 7 days. When you change `assets/css/site.css` or `assets/js/site.js`, bump the `?v=` number on its link in `index.html` (e.g. `site.css?v=2` → `site.css?v=3`) so visitors get the new file straight away.
+
 ## Hosting: keep old links working
 
 Before this site existed, the app ran on `www.ionlogs.com`, so there are bookmarks, inspector links and printed QR labels such as `www.ionlogs.com/s/e/FRG-01`. Wherever this site is hosted, **any path that isn't a file of this site must redirect to the same path on `https://app.ionlogs.com`**, keeping the query string.
@@ -33,10 +37,6 @@ Before this site existed, the app ran on `www.ionlogs.com`, so there are bookmar
 - **Apache / LiteSpeed (e.g. Hostinger):** `.htaccess` already does this, plus `ionlogs.com` → `www` and HTTPS.
 - **Other hosts:** add the equivalent rule ("if no file matches, redirect `/*` to `https://app.ionlogs.com/:splat`").
 
-## Going live
+## Where it's live
 
-1. Deploy this repo to the host.
-2. At Hostinger DNS, point `@` and `www` at the new host (today they point at the app's Render service).
-3. Check `https://www.ionlogs.com/`, `https://ionlogs.com/` and an old link like `https://www.ionlogs.com/login` (should land on `app.ionlogs.com/login`).
-
-`app.ionlogs.com` keeps pointing at Render and needs no change.
+Hostinger website `ionlogs.com` (Web hosting), deployed from this repo's `main` branch: every push to `main` goes live within a minute. DNS at Hostinger: `@` and `www` → Hostinger; `app` → the app on Render.
