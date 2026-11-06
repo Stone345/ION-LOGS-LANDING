@@ -1,0 +1,26 @@
+# IONLOGS landing page on www.ionlogs.com (Apache / LiteSpeed, e.g. Hostinger).
+# The app lives on app.ionlogs.com. Anything that isn't a file of this site (old bookmarks,
+# inspector links, printed QR labels like /s/e/FRG-01) goes to the same path on the app.
+RewriteEngine On
+
+# ionlogs.com → www.ionlogs.com
+RewriteCond %{HTTP_HOST} ^ionlogs\.com$ [NC]
+RewriteRule ^ https://www.ionlogs.com%{REQUEST_URI} [R=301,L]
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Not a file or folder of the landing page → the app (query string is kept)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ https://app.ionlogs.com/$1 [R=301,L]
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|mp4|webm|jpg|png|webp|svg)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
