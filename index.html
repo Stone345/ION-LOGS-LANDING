@@ -21,8 +21,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
-  <link rel="stylesheet" href="/assets/css/site.css?v=2" />
-  <script src="/assets/js/site.js?v=2" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=3" />
+  <script src="/assets/js/site.js?v=3" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -79,7 +79,7 @@
         </p>
         <div class="hero__cta">
           <a class="btn btn--primary" href="https://app.ionlogs.com/login">Log in to IONLOGS <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="mailto:ionlabllc@gmail.com?subject=IONLOGS%20demo%20request&amp;body=Hi%2C%0A%0AI%E2%80%99d%20like%20a%20demo%20of%20IONLOGS.%0A%0AName%3A%0ALab%3A%0ABest%20time%20to%20reach%20me%3A%0A">Request a demo</a>
+          <a class="btn btn--ghost" href="#demo">Request a demo</a>
           <a class="btn btn--text" href="#rounds">See how it works <span aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -342,17 +342,58 @@
       <div class="kit__item reveal"><span class="kit__k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span><div><b>Night-shift ready</b><p>A dark theme that keeps contrast high when the lab lights are low.</p></div></div>
     </section>
 
-    <!-- ───────────── Final CTA ───────────── -->
-    <section class="final" aria-labelledby="final-title">
+    <!-- ───────────── Final CTA + demo request ───────────── -->
+    <section class="final" id="demo" aria-labelledby="final-title">
       <div class="final__glow" aria-hidden="true"></div>
-      <div class="wrap final__inner reveal">
-        <p class="section-tag mono">§ 06 — Start</p>
-        <h2 class="final__title" id="final-title">Your next round<br /><span class="accent">starts here.</span></h2>
-        <div class="final__cta">
+      <div class="wrap final__grid">
+        <div class="final__inner reveal">
+          <p class="section-tag mono">§ 06 — Start</p>
+          <h2 class="final__title" id="final-title">Your next round<br /><span class="accent">starts here.</span></h2>
+          <p class="final__lede">Already using IONLOGS? Log in. New to it? Tell us about your lab and we’ll walk you through it with your own instruments and rounds.</p>
           <a class="btn btn--primary btn--lg" href="https://app.ionlogs.com/login">Log in to IONLOGS <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost btn--lg" href="mailto:ionlabllc@gmail.com?subject=IONLOGS%20demo%20request&amp;body=Hi%2C%0A%0AI%E2%80%99d%20like%20a%20demo%20of%20IONLOGS.%0A%0AName%3A%0ALab%3A%0ABest%20time%20to%20reach%20me%3A%0A">Request a demo</a>
+          <p class="mono muted final__url">app.ionlogs.com</p>
         </div>
-        <p class="mono muted final__url">app.ionlogs.com · ionlabllc@gmail.com</p>
+
+        <div class="demo reveal">
+          <h3 class="demo__title" id="demo-title">Request a demo</h3>
+          <p class="demo__sub">We usually reply within one business day.</p>
+          <form class="demo__form" id="demo-form" action="/demo.php" method="post" aria-labelledby="demo-title" novalidate>
+            <div class="field">
+              <label for="d-first">First Name</label>
+              <input id="d-first" name="first_name" autocomplete="given-name" placeholder="First Name" required maxlength="80" />
+            </div>
+            <div class="field">
+              <label for="d-last">Last Name</label>
+              <input id="d-last" name="last_name" autocomplete="family-name" placeholder="Last Name" required maxlength="80" />
+            </div>
+            <div class="field">
+              <label for="d-phone">Phone <span class="opt">(optional)</span></label>
+              <input id="d-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone" maxlength="40" />
+            </div>
+            <div class="field">
+              <label for="d-email">Email</label>
+              <input id="d-email" name="email" type="email" autocomplete="email" placeholder="Email" required maxlength="160" />
+            </div>
+            <div class="field field--wide">
+              <label for="d-lab">Lab Name</label>
+              <input id="d-lab" name="lab" autocomplete="organization" placeholder="Lab Name" required maxlength="160" />
+            </div>
+            <div class="field field--wide">
+              <label for="d-msg">Message <span class="opt">(optional)</span></label>
+              <textarea id="d-msg" name="message" rows="4" placeholder="Instruments, how many people log, what you use today…" maxlength="4000"></textarea>
+            </div>
+            <!-- Spam trap: hidden from people, bots fill it in. -->
+            <div class="hp" aria-hidden="true"><label for="d-web">Website</label><input id="d-web" name="website" tabindex="-1" autocomplete="off" /></div>
+            <input type="hidden" name="t" id="d-t" value="" />
+            <button class="btn btn--primary demo__submit" type="submit">Submit Request</button>
+            <p class="demo__status" id="demo-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="demo__done" id="demo-done" hidden tabindex="-1">
+            <span class="demo__check" aria-hidden="true">✓</span>
+            <h3>Request sent</h3>
+            <p>Thanks — we’ll be in touch at <b id="demo-done-email">your email</b> shortly.</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -361,7 +402,7 @@
     <div class="wrap footer__inner">
       <span class="wordmark wordmark--sm" aria-label="IONLOGS"><span class="wordmark__ion">ION</span><span class="wordmark__logs">LOGS</span></span>
       <span class="muted">© <span id="year">2026</span> IONLOGS · Demo figures on this page are synthetic.</span>
-      <span class="footer__links"><a href="mailto:ionlabllc@gmail.com?subject=IONLOGS%20demo%20request&amp;body=Hi%2C%0A%0AI%E2%80%99d%20like%20a%20demo%20of%20IONLOGS.%0A%0AName%3A%0ALab%3A%0ABest%20time%20to%20reach%20me%3A%0A">ionlabllc@gmail.com</a><a href="https://app.ionlogs.com/login">Log in</a></span>
+      <span class="footer__links"><a href="#demo">Request a demo</a><a href="https://app.ionlogs.com/login">Log in</a></span>
     </div>
   </footer>
 </body>

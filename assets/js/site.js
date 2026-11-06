@@ -432,4 +432,84 @@
       }, 90);
     });
   })();
+  /* ───────────── Demo request form ───────────── */
+  (function demoForm() {
+    const form = $("#demo-form");
+    if (!form) return;
+    const done = $("#demo-done"), status = $("#demo-status"), submit = $(".demo__submit", form);
+    const stamp = $("#d-t");
+    if (stamp) stamp.value = String(Date.now());
+
+    const showDone = (email) => {
+      form.hidden = true;
+      if (email) $("#demo-done-email").textContent = email;
+      done.hidden = false;
+      done.focus({ preventScroll: true });
+    };
+    // Without JavaScript the form posts normally and demo.php sends people back with ?demo=sent.
+    const q = new URLSearchParams(location.search).get("demo");
+    if (q === "sent") showDone("");
+    if (q === "error") { status.textContent = "We couldn’t send that. Please try again."; status.className = "demo__status is-bad"; }
+
+    const RULES = [
+      ["first_name", (v) => v ? "" : "Enter your first name."],
+      ["last_name", (v) => v ? "" : "Enter your last name."],
+      ["email", (v) => !v ? "Enter your email so we can reply." : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? "" : "That email doesn’t look right — check for typos."],
+      ["lab", (v) => v ? "" : "Enter your lab’s name."],
+    ];
+    const clearErr = (field) => {
+      field.classList.remove("is-invalid");
+      $(".field__err", field)?.remove();
+      $("input, textarea", field).removeAttribute("aria-invalid");
+    };
+    const validate = () => {
+      let first = null;
+      for (const [name, rule] of RULES) {
+        const input = form.elements[name];
+        const field = input.closest(".field");
+        clearErr(field);
+        const msg = rule(input.value.trim());
+        if (msg) {
+          field.classList.add("is-invalid");
+          input.setAttribute("aria-invalid", "true");
+          const err = document.createElement("span");
+          err.className = "field__err";
+          err.id = `${input.id}-err`;
+          err.textContent = msg;
+          input.setAttribute("aria-describedby", err.id);
+          field.appendChild(err);
+          first = first || input;
+        }
+      }
+      if (first) first.focus();
+      return !first;
+    };
+    form.addEventListener("input", (e) => {
+      const field = e.target.closest(".field");
+      if (field && field.classList.contains("is-invalid")) clearErr(field);
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.className = "demo__status";
+      status.textContent = "";
+      if (!validate()) return;
+      submit.setAttribute("aria-busy", "true");
+      submit.disabled = true;
+      submit.textContent = "Sending…";
+      try {
+        const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) return showDone(form.elements.email.value.trim());
+        throw new Error(data.error || "We couldn’t send that. Please try again.");
+      } catch (err) {
+        status.className = "demo__status is-bad";
+        status.textContent = err instanceof TypeError ? "No connection. Check your internet and try again." : err.message;
+      } finally {
+        submit.removeAttribute("aria-busy");
+        submit.disabled = false;
+        submit.textContent = "Submit Request";
+      }
+    });
+  })();
 })();

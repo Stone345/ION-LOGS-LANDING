@@ -22,9 +22,19 @@ Then open http://localhost:8080.
 | `assets/video/` | Hero background: autosampler footage, played forward then backward so it loops without a jump (WebM + MP4, 1280×720, no audio) |
 | `assets/img/` | Video poster, social share image (`og.jpg`), logo banner, iPhone icon |
 | `favicon.svg` | Browser tab icon |
+| `demo.php` | Sends demo requests by email and keeps a private copy |
 | `.htaccess` | Redirects for Apache/LiteSpeed hosting (see below) |
 
 Every number in the demos is synthetic, and the footer says so. Don't claim CLIA, CAP, 21 CFR Part 11 or HIPAA compliance on this page; the app doesn't make those claims either.
+
+## Demo requests
+
+The **Request a demo** form (`#demo`, near the bottom of the page) posts to `demo.php`, which runs on Hostinger's PHP:
+
+- Each request is emailed to **ionlabllc@gmail.com** from `no-reply@ionlogs.com`. Hitting **Reply** answers the person who asked.
+- A copy of every request is saved in `domains/ionlogs.com/demo-requests/requests.jsonl` on the hosting account (one level above `public_html`, so it can't be opened from the web). Open it in hPanel → File Manager if an email ever goes missing.
+- Spam protection: a hidden field bots fill in, a minimum time on the page, and limits of 5 requests per visitor and 60 in total per hour.
+- Change the receiving address with `TO_EMAIL` at the top of `demo.php`.
 
 ## Updating styles or scripts
 
