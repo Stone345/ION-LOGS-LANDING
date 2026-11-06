@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IONLOGS · The operations log for mass-spec labs</title>
+  <meta name="description" content="IONLOGS is the operations log for mass-spectrometry labs: fast bench rounds, independently auditable tasks, reagent traceability, column wear tracking and reports where every count opens its evidence." />
+  <meta name="theme-color" content="#08070c" />
+  <link rel="canonical" href="https://www.ionlogs.com/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="IONLOGS" />
+  <meta property="og:title" content="IONLOGS · The operations log for mass-spec labs" />
+  <meta property="og:description" content="Bench rounds, reagent traceability, column wear and reports where every count opens its evidence." />
+  <meta property="og:url" content="https://www.ionlogs.com/" />
+  <meta property="og:image" content="https://www.ionlogs.com/assets/img/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <script src="/assets/js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ───────────── Navigation ───────────── -->
+  <header class="nav" id="nav">
+    <div class="nav__inner wrap">
+      <a class="brand" href="/" aria-label="IONLOGS home">
+        <span class="wordmark" aria-hidden="true">
+          <span class="wordmark__ion"><span class="wordmark__i">I</span><span class="wordmark__o">O</span>N</span><span class="wordmark__logs">LOGS</span>
+          <svg class="wordmark__orbit" viewBox="0 0 200 100" focusable="false">
+            <ellipse cx="100" cy="50" rx="96" ry="30" transform="rotate(-20 100 50)" />
+            <rect class="ion" x="-5" y="-5" width="10" height="10">
+              <animateMotion dur="7s" repeatCount="indefinite" rotate="0" path="M 4 50 a 96 30 0 1 0 192 0 a 96 30 0 1 0 -192 0" />
+            </rect>
+          </svg>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#rounds">Rounds</a>
+        <a href="#trace">Traceability</a>
+        <a href="#wear">Columns</a>
+        <a href="#reports">Reports</a>
+        <a href="#roles">Roles</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="https://app.ionlogs.com/login">Log in <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ───────────── Hero ───────────── -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__media" aria-hidden="true">
+        <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/img/autosampler-poster.jpg">
+          <source src="/assets/video/autosampler.webm" type="video/webm" />
+          <source src="/assets/video/autosampler.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__tint"></div>
+        <div class="hero__grid"></div>
+        <div class="hero__scan"></div>
+      </div>
+
+      <div class="hero__body wrap">
+        <p class="eyebrow"><span class="dot"></span>Lab operations · Mass spectrometry</p>
+        <h1 class="hero__title" id="hero-title">
+          Every reading.<br />
+          Every lot.<br />
+          Every injection.<br />
+          <span class="accent">On the record.</span>
+        </h1>
+        <p class="hero__lede">
+          IONLOGS is the operations log for mass-spec labs: fast rounds at the bench, tasks that each keep their own audit trail,
+          reagent lots traced to every plate, and reports where every number opens its evidence.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="https://app.ionlogs.com/login">Log in to IONLOGS <span aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#rounds">See how it works</a>
+        </div>
+      </div>
+
+      <div class="hero__readout wrap" aria-hidden="true">
+        <div class="readout">
+          <div class="readout__meta mono">
+            <span>SAMPLE <b data-tick>07</b>/24</span>
+            <span>LC1 · COLUMN C-7</span>
+            <span class="hide-sm">ESI+ · SCAN 100–1000 m/z</span>
+            <span class="readout__live"><i></i>ACQUIRING</span>
+          </div>
+          <svg class="spectrum" id="spectrum" viewBox="0 0 1200 140" preserveAspectRatio="none"></svg>
+          <div class="readout__axis mono"><span>100</span><span>250</span><span>400</span><span>550</span><span>700</span><span>850</span><span>1000 m/z</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── Principles ───────────── -->
+    <div class="wrap">
+    <section class="principles" aria-label="Principles">
+      <article class="principle reveal">
+        <span class="principle__n mono">01</span>
+        <h2>Independent micro-tasks</h2>
+        <p>Each check has its own value, person, observed time and audit trail. A round is a view, never one shared tick-box.</p>
+      </article>
+      <article class="principle reveal">
+        <span class="principle__n mono">02</span>
+        <h2>Nothing is overwritten</h2>
+        <p>A correction is a new revision with a reason. The original value, who changed it and when all stay visible.</p>
+      </article>
+      <article class="principle reveal">
+        <span class="principle__n mono">03</span>
+        <h2>Counts that reconcile</h2>
+        <p>Every number on a dashboard or report is built from the same query as the list it opens. Click it and count the rows.</p>
+      </article>
+      <article class="principle reveal">
+        <span class="principle__n mono">04</span>
+        <h2>Made for gloved hands</h2>
+        <p>One column on a phone, large touch targets, and Enter saves the reading and jumps to the next unit.</p>
+      </article>
+    </section>
+    </div>
+
+    <!-- ───────────── Rounds (interactive) ───────────── -->
+    <section class="feature" id="rounds" aria-labelledby="rounds-title">
+      <div class="wrap feature__grid">
+        <div class="feature__copy reveal">
+          <p class="section-tag mono">§ 01 — Rounds &amp; tasks</p>
+          <h2 class="section-title" id="rounds-title">A cold-storage round in under a minute.</h2>
+          <p>
+            Open the round and the first unit is already focused. Type the reading, press Enter, and it saves with who observed it and when,
+            then moves to the next fridge. Nothing expands, nothing reorders, the page never jumps.
+          </p>
+          <ul class="ticks">
+            <li>Out-of-range values warn <em>before</em> you save, then open an exception automatically.</li>
+            <li>Late entries and “no testing today” both require a reason, and are never counted as observations.</li>
+            <li>Missed, due and overdue work in one list, with supervisors notified instead of finding out at audit.</li>
+          </ul>
+          <p class="hint mono">Try it → type a temperature and press Enter. Try 9.2.</p>
+        </div>
+
+        <div class="device reveal" aria-label="Interactive demo of a cold-storage round">
+          <div class="device__bar">
+            <span class="mono">Morning cold-storage round</span>
+            <span class="pill mono" id="round-progress">0 of 3 done</span>
+          </div>
+          <div class="device__exceptions mono" id="round-exceptions" hidden>
+            <span class="badge badge--bad">!</span> <span id="round-exc-count">1</span> open exception — supervisor notified
+          </div>
+          <ol class="round" id="round">
+            <li class="round__row" data-min="2" data-max="8" data-unit="°C" data-prev="3.7">
+              <div class="round__head"><b>FRG-01</b> Temperature check <span class="status status--due">Due</span></div>
+              <div class="round__sub">Reagent refrigerator · range 2 to 8 °C · previous 3.7 °C</div>
+              <label class="round__field"><span class="sr">Reading for FRG-01 in °C</span><input inputmode="decimal" autocomplete="off" placeholder="—" /><span class="unit">°C</span></label>
+              <p class="round__msg" aria-live="polite"></p>
+            </li>
+            <li class="round__row" data-min="2" data-max="8" data-unit="°C" data-prev="5.0">
+              <div class="round__head"><b>FRG-04</b> Temperature check <span class="status status--due">Due</span></div>
+              <div class="round__sub">Sample hold refrigerator · range 2 to 8 °C · previous 5.0 °C</div>
+              <label class="round__field"><span class="sr">Reading for FRG-04 in °C</span><input inputmode="decimal" autocomplete="off" placeholder="—" /><span class="unit">°C</span></label>
+              <p class="round__msg" aria-live="polite"></p>
+            </li>
+            <li class="round__row" data-min="-25" data-max="-15" data-unit="°C" data-prev="-19.8">
+              <div class="round__head"><b>FRZ-01</b> Temperature check <span class="status status--due">Due</span></div>
+              <div class="round__sub">−20 °C freezer · range −25 to −15 °C · previous −19.8 °C</div>
+              <label class="round__field"><span class="sr">Reading for FRZ-01 in °C</span><input inputmode="decimal" autocomplete="off" placeholder="—" /><span class="unit">°C</span></label>
+              <p class="round__msg" aria-live="polite"></p>
+            </li>
+          </ol>
+          <div class="device__foot mono"><span>Synthetic demo data</span><button type="button" class="link" id="round-reset">Reset</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── Traceability (interactive) ───────────── -->
+    <section class="feature feature--alt" id="trace" aria-labelledby="trace-title">
+      <div class="wrap">
+        <div class="feature__head reveal">
+          <p class="section-tag mono">§ 02 — Reagent traceability &amp; recalls</p>
+          <h2 class="section-title" id="trace-title">Recall a lot. See everything it touched.</h2>
+          <p>
+            Every preparation records the lots it was made from, and every plate records what it ran with. Recall a bottle of methanol and
+            IONLOGS follows it through calibrators and mobile phases — even two steps away — to every plate, instrument and result ID.
+            New use is blocked; a supervisor override is audited.
+          </p>
+        </div>
+
+        <div class="trace reveal">
+          <div class="trace__panel">
+            <div class="trace__graph" id="trace-graph" role="img" aria-label="Lineage of lot M-100: three derived lots, six plates on two instruments, seventeen result references."></div>
+            <div class="trace__side">
+              <div class="trace__lot">
+                <span class="mono muted">LOT</span>
+                <b>M-100</b>
+                <span>Methanol, LC-MS grade</span>
+                <span class="status status--ok" id="trace-status">In date</span>
+              </div>
+              <dl class="trace__stats">
+                <div><dt>Derived lots</dt><dd data-count="3">0</dd></div>
+                <div><dt>Plates</dt><dd data-count="6">0</dd></div>
+                <div><dt>Instruments</dt><dd data-count="2">0</dd></div>
+                <div><dt>Result refs</dt><dd data-count="17">0</dd></div>
+              </dl>
+              <button type="button" class="btn btn--danger" id="trace-recall">Recall M-100</button>
+              <p class="trace__note mono" id="trace-note">Synthetic demo data</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── Columns & wear (interactive) ───────────── -->
+    <section class="feature" id="wear" aria-labelledby="wear-title">
+      <div class="wrap feature__grid feature__grid--flip">
+        <div class="feature__copy reveal">
+          <p class="section-tag mono">§ 03 — Columns &amp; wear parts</p>
+          <h2 class="section-title" id="wear-title">Know a column is tired before your QC does.</h2>
+          <p>
+            Confirmed injections from each plate land in the column’s ledger with a running total. Warn and replace limits are set by your lab,
+            and the alert appears on Home before the limit, not after a failed batch.
+          </p>
+          <ul class="ticks">
+            <li>Lamps, pump seals and guard columns tracked by injections, hours or days installed.</li>
+            <li>Replacement reminders open as tasks within your lead time and close when the swap is recorded.</li>
+            <li>Replacing a column retires it with its full history kept.</li>
+          </ul>
+        </div>
+
+        <div class="gauge-card reveal">
+          <div class="gauge-card__head">
+            <div><span class="mono muted">COLUMN</span> <b>C-7</b> <span class="muted">on LC1</span></div>
+            <span class="status status--warn" id="gauge-status">Warning</span>
+          </div>
+          <div class="gauge">
+            <svg viewBox="0 0 220 220" class="gauge__svg" aria-hidden="true">
+              <circle class="gauge__track" cx="110" cy="110" r="88" pathLength="1000" />
+              <circle class="gauge__warn" cx="110" cy="110" r="88" pathLength="1000" />
+              <circle class="gauge__value" id="gauge-value" cx="110" cy="110" r="88" pathLength="1000" />
+              <g id="gauge-ticks"></g>
+            </svg>
+            <div class="gauge__label">
+              <span class="gauge__num" id="gauge-num">0</span>
+              <span class="mono muted">of 1,000 injections</span>
+            </div>
+          </div>
+          <p class="gauge__msg" id="gauge-msg" aria-live="polite">26 left · about 5 days at the current pace</p>
+          <div class="gauge-card__foot">
+            <button type="button" class="btn btn--ghost btn--sm" id="gauge-run">Record plate P-91 · +40 injections</button>
+            <button type="button" class="link mono" id="gauge-reset">Reset</button>
+          </div>
+          <ul class="parts mono">
+            <li><span>Lamp L-4 · LC2</span><span class="bar"><i style="--v:.974"></i></span><span>1,948 / 2,000 h</span></li>
+            <li><span>Pump seals · LC1</span><span class="bar"><i style="--v:.62"></i></span><span>124 / 200 d</span></li>
+            <li><span>Guard G-3 · LC1</span><span class="bar"><i style="--v:.41"></i></span><span>205 / 500 inj</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── Reports (interactive) ───────────── -->
+    <section class="feature feature--alt" id="reports" aria-labelledby="reports-title">
+      <div class="wrap">
+        <div class="feature__head reveal">
+          <p class="section-tag mono">§ 04 — Reports &amp; evidence</p>
+          <h2 class="section-title" id="reports-title">Every number opens its evidence.</h2>
+          <p>
+            Pick a period and an instrument. Each count is a link to exactly those rows — what it refers to, who, observed versus entered time —
+            and a line underneath tells you whether all counts reconcile. Export what you see, or generate a complete inspection package.
+          </p>
+        </div>
+
+        <div class="reports reveal">
+          <div class="tiles" role="tablist" aria-label="Report counts for October">
+            <button class="tile" role="tab" aria-selected="false" data-metric="tasks"><span>Tasks completed</span><b>1,284</b><small class="mono">+6% vs Sep</small></button>
+            <button class="tile" role="tab" aria-selected="false" data-metric="exceptions"><span>Exceptions</span><b>23</b><small class="mono">−4 vs Sep</small></button>
+            <button class="tile" role="tab" aria-selected="false" data-metric="late"><span>Late entries</span><b>9</b><small class="mono">all with reason</small></button>
+            <button class="tile" role="tab" aria-selected="true" data-metric="dates"><span>Date/time changes</span><b>14</b><small class="mono">observed ≠ entered</small></button>
+            <button class="tile" role="tab" aria-selected="false" data-metric="corrections"><span>Corrections</span><b>31</b><small class="mono">reason required</small></button>
+          </div>
+          <div class="reconcile mono"><span class="badge badge--ok">✓</span> All counts reconcile with their rows · October 2026 · all instruments</div>
+
+          <div class="evidence" role="tabpanel" aria-live="polite">
+            <div class="evidence__head"><b id="ev-title">Date/time changes</b><span class="mono muted" id="ev-count">14 rows</span></div>
+            <div class="evidence__table" id="ev-rows"></div>
+          </div>
+
+          <div class="package">
+            <div class="package__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" /><path d="M14 2v6h6" /><path d="M9 13h8M9 17h6" /></svg>
+            </div>
+            <div class="package__body">
+              <b>Inspection package · October 2026</b>
+              <p>Summary, notable exceptions and corrective actions, coverage, then an indexed record of every section. Signed off against that exact file.</p>
+              <div class="package__progress" aria-hidden="true"><i id="pkg-bar"></i></div>
+              <p class="package__meta mono" id="pkg-meta">Not generated</p>
+            </div>
+            <button type="button" class="btn btn--ghost btn--sm" id="pkg-run">Generate</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── Roles ───────────── -->
+    <section class="roles wrap" id="roles" aria-labelledby="roles-title">
+      <div class="feature__head reveal">
+        <p class="section-tag mono">§ 05 — Roles</p>
+        <h2 class="section-title" id="roles-title">One lab. Four ways in.</h2>
+        <p>Everyone sees the same records through the lens of their job — and each lab sees only its own.</p>
+      </div>
+      <div class="roles__grid">
+        <article class="role reveal">
+          <span class="role__sym mono">Te</span>
+          <h3>Technician</h3>
+          <p>Rounds, My Work, receiving lots, preparations and plates. Walk mode for a full-screen keypad on the move.</p>
+        </article>
+        <article class="role reveal">
+          <span class="role__sym mono">Su</span>
+          <h3>Supervisor</h3>
+          <p>Exceptions to acknowledge or close with a note, a keyboard review queue, recalls and overrides.</p>
+        </article>
+        <article class="role reveal">
+          <span class="role__sym mono">Ad</span>
+          <h3>Admin</h3>
+          <p>Lab settings, closures, versioned task definitions with a reason for every change, users and equipment.</p>
+        </article>
+        <article class="role reveal">
+          <span class="role__sym mono">Au</span>
+          <h3>Auditor</h3>
+          <p>Everything visible, nothing editable. Full evidence archive with the audit log and a reconciled manifest.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ───────────── Everywhere ───────────── -->
+    <section class="kit wrap" aria-label="At the bench">
+      <div class="kit__item reveal"><span class="kit__k mono" aria-hidden="true">QR</span><div><b>Labels on everything</b><p>Scan a fridge, instrument or lot to open its record and log against it.</p></div></div>
+      <div class="kit__item reveal"><span class="kit__k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2l20 20"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-2.3-1.6"/><path d="M2 8.8a15 15 0 0 1 4.2-2.7M22 8.8A15 15 0 0 0 11 5"/><path d="M12 20h.01"/></svg></span><div><b>Works without signal</b><p>Readings taken in a cold room queue on the device and sync on reconnect.</p></div></div>
+      <div class="kit__item reveal"><span class="kit__k"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span><div><b>Installs like an app</b><p>Add it to the home screen on phones, tablets and bench computers.</p></div></div>
+      <div class="kit__item reveal"><span class="kit__k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span><div><b>Night-shift ready</b><p>A dark theme that keeps contrast high when the lab lights are low.</p></div></div>
+    </section>
+
+    <!-- ───────────── Final CTA ───────────── -->
+    <section class="final" aria-labelledby="final-title">
+      <div class="final__glow" aria-hidden="true"></div>
+      <div class="wrap final__inner reveal">
+        <p class="section-tag mono">§ 06 — Start</p>
+        <h2 class="final__title" id="final-title">Your next round<br /><span class="accent">starts here.</span></h2>
+        <a class="btn btn--primary btn--lg" href="https://app.ionlogs.com/login">Log in to IONLOGS <span aria-hidden="true">→</span></a>
+        <p class="mono muted final__url">app.ionlogs.com</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="wordmark wordmark--sm" aria-label="IONLOGS"><span class="wordmark__ion">ION</span><span class="wordmark__logs">LOGS</span></span>
+      <span class="muted">© <span id="year">2026</span> IONLOGS · Demo figures on this page are synthetic.</span>
+      <a href="https://app.ionlogs.com/login">Log in</a>
+    </div>
+  </footer>
+</body>
+</html>
